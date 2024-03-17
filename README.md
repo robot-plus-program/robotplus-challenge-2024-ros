@@ -2,7 +2,7 @@
 >  협업지능 챌린지용 ROS 도커 이미지 생성을 위한 레포지토리
 
 ## 1. 도커파일 기본 구성 환경
-<img src="images/ubt.jpg" alt="ubuntu" width="200px" style="margin-right: 50px;"/> <img src="images/cuda.png" alt="cuda" width="200px" style="margin-right: 50px;"/> <img src="images/ros.png" alt="ROS_Noetic" width="200px"/>
+<img src="images/ubt.jpg" alt="ubuntu" width="200px" style="margin-right: 50px;"/> <img src="images/cuda.jpg" alt="cuda" width="200px" style="margin-right: 50px;"/> <img src="images/ros.png" alt="ROS_Noetic" width="200px"/>
 
 - Ubuntu 20.04 Focal
 - Nvidia CUDA 11.3.1
