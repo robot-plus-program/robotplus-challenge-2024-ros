@@ -10,6 +10,8 @@
 - OpenSSH
 - Add New User
 - Add Useful ROS, catkin Setup to bashrc
+<br>
+<br>
 
 ## 2. 도커파일 생성시 사용되는 Arguments
 - UBUNTU_RELEASE: 가져올 Ubuntu OS의 버전
@@ -39,6 +41,8 @@
 
 - PASSWORD: 사용할 도커의 유저의 비밀번호
     + 기본값: keti
+<br>
+<br>
 
 ## 3. 챌린지용 ROS CUDA 도커파일 빌드 방법
 - git 레포지토리 클론
@@ -71,6 +75,8 @@
     ```bash
     chmod 755 build.bash && bash build.bash
     ```
+<br>
+<br>
 
 ## 4. 챌린지용 ROS CUDA 도커파일 실행 방법
 - 터미널에 입력
@@ -84,6 +90,8 @@
     ```bash
     chmod 755 run.bash && bash run.bash
     ```
+<br>
+<br>
 
 ## 5. 챌린지용 ROS CUDA 도커 접속 방법
 - 터미널에 입력
