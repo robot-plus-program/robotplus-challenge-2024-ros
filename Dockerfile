@@ -1,11 +1,6 @@
 ARG UBUNTU_RELEASE=20.04
-ARG CUDA_VERSION=11.3.1
-ARG CUDA_PURPOSE=devel
-# If you need cuDNN, write "cudnn(version)-"
-# ARG CUDNN_VERSION=cudnn8-
-ARG CUDNN_VERSION=""
 
-FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}-${CUDNN_VERSION}${CUDA_PURPOSE}-ubuntu${UBUNTU_RELEASE}
+FROM ubuntu:${UBUNTU_RELEASE}
 
 LABEL maintainer "Jung YoHan"
 LABEL maintainer "https://github.com/neoplanetz"
@@ -14,12 +9,8 @@ ENV REFRESHED_AT 2024-03-17
 ARG ROS_VER=noetic
 ARG NAME_CATKIN_WS=catkin_ws
 ARG DEBIAN_FRONTEND=noninteractive
-ARG CUDA_ENV_VERSION=11.3
-ENV CUDA_ENV_VER=${CUDA_ENV_VERSION}
 ENV ROS_VERSION=${ROS_VER}
 ENV CATKIN_WS_NAME=${NAME_CATKIN_WS}
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
 
 # Install fundamental packages
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
