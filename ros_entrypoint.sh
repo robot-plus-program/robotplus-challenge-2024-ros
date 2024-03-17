@@ -3,7 +3,7 @@ set -e
 
 name_ros_version=${name_ros_version:=$ROS_VERSION}
 name_catkin_workspace=${name_catkin_workspace:=$CATKIN_WS_NAME}
-name_cuda_version=${name_cuda_version:=$CUDA_ENV_VERSION}
+name_cuda_version=${name_cuda_version:=$CUDA_ENV_VER}
 
 ## Set ROS Catkin Workspace
 source /opt/ros/$name_ros_version/setup.bash
