@@ -6,7 +6,7 @@ name_catkin_ws=catkin_ws
 user_name=ros
 password=keti
 
-docker build -t robotplus-challenge-ros:base . \
+docker build -t robotplus-challenge-2024-ros:base . \
             --build-arg UBNUTU_RELEASE=$ubuntu_release \
             --build-arg ROS_VER=$ros_ver \
             --build-arg NAME_CATKIN_WS=$name_catkin_ws \
