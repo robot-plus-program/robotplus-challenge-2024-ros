@@ -1,5 +1,5 @@
-# 로봇플러스 협업지능 챌린지용 ROS CUDA Docker
->  협업지능 챌린지용 ROS 도커 이미지 생성을 위한 레포지토리
+# 로봇플러스 협업지능 챌린지 2024용 ROS CUDA Docker
+>  협업지능 챌린지 2024용 ROS 도커 이미지 생성을 위한 레포지토리
 
 ## 1. 도커파일 기본 구성 환경
 <img src="images/ubt.jpg" alt="ubuntu" width="200px" style="margin-right: 50px;"/> <img src="images/cuda.jpg" alt="cuda" width="200px" style="margin-right: 50px;"/> <img src="images/ros.png" alt="ROS_Noetic" width="200px"/>
@@ -47,18 +47,18 @@
 ## 3. 챌린지용 ROS CUDA 도커파일 빌드 방법
 - git 레포지토리 클론
     ```bash
-    git clone https://github.com/robot-plus-program/robotplus-challenge-ros.git
+    git clone https://github.com/robot-plus-program/robotplus-challenge-2024-ros.git
     ```
 
 - 레포지토리로 이동
     ```bash
-    cd robotplus-challenge-ros
+    cd robotplus-challenge-2024-ros
     ```
 
 - 터미널에서 CLI로 도커 이미지 빌드
 
     ```bash
-    docker build -t robotplus-challenge-ros-cuda:base . \
+    docker build -t robotplus-challenge-2024-ros-cuda:base . \
             --build-arg UBNUTU_RELEASE=20.04 \
             --build-arg CUDA_VERSION=11.3.1 \
             --build-arg CUDA_ENV_VERSION=11.3 \
@@ -82,7 +82,7 @@
 - 터미널에 입력
     + -p 에는 SSH 접속에 사용할 포트번호 입력(예:4000)
     ```bash
-    docker run -d --gpus all -p 4000:22 robotplus-challenge-ros-cuda:base
+    docker run -d --gpus all -p 4000:22 robotplus-challenge-2024-ros-cuda:base
     ```
 
 - 또는 run.bash 파일 사용

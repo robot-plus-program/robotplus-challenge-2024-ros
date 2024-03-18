@@ -10,7 +10,7 @@ name_catkin_ws=catkin_ws
 user_name=ros
 password=keti
 
-docker build -t robotplus-challenge-ros-cuda:base . \
+docker build -t robotplus-challenge-2024-ros-cuda:base . \
             --build-arg UBNUTU_RELEASE=$ubuntu_release \
             --build-arg CUDA_VERSION=$cuda_version \
             --build-arg CUDA_ENV_VERSION=$cuda_env_version \
