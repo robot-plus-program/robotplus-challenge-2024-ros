@@ -19,6 +19,8 @@ RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --n
         build-essential \
         ca-certificates \
         curl \
+        gnupg2 \
+        lsb-release \
         locales \
         software-properties-common \
         openssh-server \
@@ -61,9 +63,7 @@ RUN mkdir /var/run/sshd &&  \
 EXPOSE 22 4000
 
 # Install ROS Noetic
-RUN apt-get update && apt-get install --no-install-recommends -y \
-        chrony \
-        curl && \
+RUN apt-get update && \
     sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - 
 
