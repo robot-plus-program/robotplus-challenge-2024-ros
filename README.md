@@ -19,9 +19,6 @@
 - ROS_VER: 설치할 ROS의 버전
     + 기본값: noetic
 
-- NAME_CATKIN_WS: 설치될 catkin 워크스페이스의 이름
-    + 기본값: catkin_ws
-
 - USER_NAME: 사용할 도커의 유저 이름
     + 기본값: ros
 
@@ -47,7 +44,6 @@
     docker build -t robotplus-challenge-2024-ros:base . \
             --build-arg UBNUTU_RELEASE=20.04 \
             --build-arg ROS_VER=noetic \
-            --build-arg NAME_CATKIN_WS=catkin_ws \
             --build-arg USER_NAME=ros \
             --build-arg PASSWORD=keti
     ```

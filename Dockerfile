@@ -7,10 +7,8 @@ LABEL maintainer "https://github.com/neoplanetz"
 ENV REFRESHED_AT 2024-03-18
 
 ARG ROS_VER=noetic
-ARG NAME_CATKIN_WS=catkin_ws
 ARG DEBIAN_FRONTEND=noninteractive
 ENV ROS_VERSION=${ROS_VER}
-ENV CATKIN_WS_NAME=${NAME_CATKIN_WS}
 
 # Install fundamental packages
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
@@ -87,13 +85,25 @@ USER $USER
 WORKDIR /home/$USER
 RUN rosdep update
 
-# setup entrypoint
+SHELL ["/bin/bash", "-c"]
+RUN source /opt/ros/noetic/setup.bash \
+  && mkdir -p ~/catkin_ws/src \
+  && cd ~/catkin_ws/src \
+  && catkin_init_workspace \
+  && cd ~/catkin_ws \
+  && catkin_make
+
+RUN echo "export ROS_MASTER_URI=http://localhost:11311" >> ~/.bashrc \
+  && echo "export ROS_HOSTNAME=localhost" >> ~/.bashrc \
+  && echo "alias eb='nano ~/.bashrc'" >> ~/.bashrc \
+  && echo "alias sb='source ~/.bashrc'" >> ~/.bashrc \
+  && echo "alias gs='git status'" >> ~/.bashrc \
+  && echo "alias gp='git pull'" >> ~/.bashrc \
+  && echo "alias cw='cd ~/catkin_ws'" >> ~/.bashrc \
+  && echo "alias cs='cd ~/catkin_ws/src'" >> ~/.bashrc \
+  && echo "alias cm='cd ~/catkin_ws && catkin_make'" >> ~/.bashrc \
+  && echo 'source /opt/ros/noetic/setup.bash' >> ~/.bashrc \
+  && echo 'source ~/catkin_ws/devel/setup.bash' >> ~/.bashrc
+
 USER root
-COPY ./ros_entrypoint.sh /
-RUN chmod 755 /ros_entrypoint.sh
-
-USER $USER
-ENV SHELL /bin/bash
-WORKDIR /home/$USER
-
-ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
