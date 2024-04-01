@@ -6,7 +6,6 @@ cuda_env_version=11.3
 cuda_purpose=devel
 cudnn_version=""
 ros_ver=noetic
-name_catkin_ws=catkin_ws
 user_name=ros
 password=keti
 
@@ -17,6 +16,5 @@ docker build -t robotplus-challenge-2024-ros-cuda:base . \
             --build-arg CUDA_PURPOSE=$cuda_purpose \
             --build-arg CUDNN_VERSION=$cudnn_version \
             --build-arg ROS_VER=$ros_ver \
-            --build-arg NAME_CATKIN_WS=$name_catkin_ws \
             --build-arg USER_NAME=$user_name \
             --build-arg PASSWORD=$password
