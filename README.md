@@ -27,7 +27,106 @@
 <br>
 <br>
 
-## 3. 챌린지용 ROS 도커파일 빌드 방법
+## 3. 챌린지용 ROS 도커파일 Portainer 사용 방법
+### 1). 도커 이미지 생성
+- 협업지능 챌린지 2024용 Portainer 웹페이지 접속
+    > 접속주소: https://robotplus.duckdns.org:9443
+
+- 본인이 신청한 아이디와 비밀번호로 로그인
+    - <img src="images/login.png" alt="portainer_login" width="500px" />
+<br>
+
+- Environments에 challenge-2024 오른쪽의 [Live Connect] 선택
+    - <img src="images/home.png" alt="portainer_home" width="500px"/>
+<br>
+
+- 자신의 도커 이미지를 빌드하여 생성하기 위해 왼쪽 메뉴의 images 선택
+    - <img src="images/dash.png" alt="portainer_dash" width="500px"/>
+<br>
+
+- Image List의 오른쪽 하단 [Build a new image] 선택
+    - <img src="images/build.png" alt="portainer_build" width="500px"/>
+<br>
+
+- 현재 로봇플러스 협업지능 챌린지 Github Repository의 Dockerfile 안에 작성된 내용을 Web editor에 붙여넣기
+    - <img src="images/editor.png" alt="portainer_editor" width="500px"/>
+<br>
+
+- Dockerfile에 정의된 ARG 변수들 값을 위의 [Arguments](#2-도커파일-생성시-사용되는-arguments) 정보를 참조하여 수정 후 Actions의 [Build the image] 선택
+    - <img src="images/docker_build.png" alt="portainer_docker_build" width="500px"/>
+<br>
+
+- 도커 이미지 생성 완료 후 로그 화면 출력됨
+    - <img src="images/build_complete.png" alt="portainer_build_complete" width="500px"/>
+<br>
+
+- 왼쪽 Images 메뉴로 들어가 생성된 도커 이미지 확인
+    - <img src="images/check_image.png" alt="portainer_check_image" width="500px"/>
+
+<br>
+<br>
+
+### 2). 도커 컨테이너 생성
+- 왼쪽 Stacks 메뉴로 들어가 [Add stack] 선택
+    - <img src="images/stack.png" alt="portainer_stack" width="500px"/>
+<br>
+
+- Name 항목에 stack 이름 설정 및 Web Editor에 아래 내용을 붙여넣고, 수정한 후 Actions의 [Deploy the stack]로 Stack 실행
+    ```yaml
+    version: "3.8"
+
+    services:
+      my-ros-noetic-cuda:
+        image: my-challenge-2024-ros:base
+        ports:
+          - "4000:22"
+        deploy:
+          resources:
+            limits:
+              cpus: '4.0'
+              memory: 4000M
+            reservations:
+              cpus: '2.0'
+              memory: 2000M
+          restart_policy:
+            condition: on-failure
+    ```
+  + services 밑에 사용하기 원하는 서비스 이름 작성
+  + image: 자신의 도커 이미지 이름 및 태그 작성
+  + ports: 자신이 부여받은 도커 컨테이너 SSH 접속에 사용할 포트번호 작성
+  + <img src="images/create_stack.png" alt="portainer_create_stack" width="500px"/>
+<br>
+
+- 생성 및 실행된 Stack 선택
+    - <img src="images/my_stack.png" alt="portainer_my_stack" width="500px"/>
+<br>
+
+- Stack에서 생성한 컨테이너가 정상 작동 중인지 확인
+    - <img src="images/check_stack.png" alt="portainer_check_stack" width="500px"/>
+<br>
+
+### 3). 도커 컨테이너 접속 테스트
+- Portainer를 사용한 접속
+    - 왼쪽 Containers 메뉴 선택 후 자신의 컨테이너에서 Quick Actions의 [Exec Console] 선택
+        - <img src="images/container_exec.png" alt="portainer_container_exec" width="500px"/>
+        <br>
+    - User 항목에 자신의 User Name 작성 후 [Connect] 연결
+        - <img src="images/console_connect.png" alt="portainer_console_connect" width="500px"/>
+        <br>
+    - 생성된 컨테이너 콘솔 접속 확인
+        - <img src="images/check_console.png" alt="portainer_check_console" width="500px"/>
+        <br>
+
+- 터미널 사용한 접속
+  - SSH를 통해 생성한 도커 컨테이너 연결(포트번호는 부여된 번호로 설정)
+      ```bash
+      ssh ros@robotplus.duckdns.org -p 4000
+      ```
+      - <img src="images/terminal_ssh.png" alt="portainer_terminal_ssh" width="500px"/>
+    <br>
+
+## 4. 개인용 ROS 도커파일 사용 방법
+### 1). 도커파일 빌드 방법
 - git 레포지토리 클론
     ```bash
     git clone -b no-cuda https://github.com/robot-plus-program/robotplus-challenge-2024-ros.git
@@ -56,7 +155,7 @@
 <br>
 <br>
 
-## 4. 챌린지용 ROS 도커파일 실행 방법
+### 2). 도커파일 실행 방법 
 - 터미널에 입력
     + -p 에는 SSH 접속에 사용할 포트번호 입력(예:4000)
     ```bash
@@ -71,7 +170,7 @@
 <br>
 <br>
 
-## 5. 챌린지용 ROS 도커 접속 방법
+### 3). 도커 컨테이너 SSH 접속 방법 
 - 터미널에 입력
     + 도커 실행할때 사용한 SSH 포트번호와 USER_NAME, PASSWORD를 사용
 
