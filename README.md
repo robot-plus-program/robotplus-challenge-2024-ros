@@ -62,7 +62,7 @@
     - <img src="images/build.png" alt="portainer_build" width="500px"/>
 <br>
 
-- 현재 로봇플러스 협업지능 챌린지 Github Repository의 Dockerfile 안에 작성된 내용을 Web editor에 붙여넣기
+- 상단의 Naming 카테고리 밑의 name 부분에 생성할 이미지의 이름 및 태그를 넣고, 현재 로봇플러스 협업지능 챌린지 Github Repository의 Dockerfile 안에 작성된 내용을 Web editor에 붙여넣기
     - <img src="images/editor.png" alt="portainer_editor" width="500px"/>
 <br>
 
@@ -181,7 +181,7 @@
 - 터미널에 입력
     + -p 에는 SSH 접속에 사용할 포트번호 입력(예:4000)
     ```bash
-    docker run -d --gpus all -p 4000:22 robotplus-challenge-2024-ros-cuda:base
+    docker run -d -it --privileged --gpus all -p 4000:22 -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix:rw robotplus-challenge-2024-ros-cuda:base
     ```
 
 - 또는 run.bash 파일 사용
@@ -192,8 +192,14 @@
 <br>
 <br>
 
-### 3). 도커 컨테이너 SSH 접속 방법 
-- 터미널에 입력
+### 3). 도커 컨테이너 접속 방법
+- Exec 접속
+    + 도커 실행할때 사용한 USER_NAME 사용
+    ```bash
+    docker exec -it -u ros {docker container ID} /bin/bash
+    ```
+
+- SSH 접속
     + 도커 실행할때 사용한 SSH 포트번호와 USER_NAME, PASSWORD를 사용
 
     ```bash
